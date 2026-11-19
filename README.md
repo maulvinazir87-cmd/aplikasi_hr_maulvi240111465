@@ -1,75 +1,68 @@
-# Toko App
+# Aplikasi HR
 
-Aplikasi demo toko online sederhana yang dibuat dengan Flutter. Aplikasi ini
-memiliki tampilan untuk web dan Android, dengan alur login, pencarian produk,
-keranjang, dan checkout demo.
+Aplikasi demo manajemen sumber daya manusia (HR) yang dibuat dengan Flutter.
+Proyek ini menampilkan beberapa pendekatan pengelolaan state melalui modul cuti,
+penggajian, login, dan dashboard HR.
 
 ## Identitas
 
-- Nama: **maulvinazirrahmat**
+- Nama: **Maulvi Nazir Rahmat**
 - NIM: **240111465**
 
-## Tautan
+## Repository
 
-- Profil GitHub: [maulvinazir87-cmd](https://github.com/maulvinazir87-cmd)
-- Repository: [Toko App di GitHub](https://github.com/maulvinazir87-cmd/-P9_24011130465_MaulviNazirRahmat.pdf)
+[maulvinazir87-cmd/aplikasi_hr_maulvi240111465](https://github.com/maulvinazir87-cmd/aplikasi_hr_maulvi240111465)
 
 ## Fitur
 
-- Login dan logout menggunakan nama pengguna.
-- Halaman yang memerlukan login dilindungi dan diarahkan ke halaman login.
-- Menampilkan daftar produk, detail produk, dan pencarian berdasarkan nama atau deskripsi.
-- Menambahkan dan menghapus produk dari keranjang, termasuk jumlah dan total harga.
-- Alur checkout demo dengan ringkasan pesanan.
-- Navigasi bawah untuk Beranda, Cari, Keranjang, dan Profil.
-- Halaman tidak ditemukan untuk rute yang tidak tersedia.
+- Beranda HR dengan empat modul dan pilihan tema terang/gelap.
+- **Pengajuan cuti:** pencarian karyawan, pengajuan dan pembatalan cuti, badge, serta ringkasan dengan Provider.
+- **Penggajian:** daftar dan detail gaji, status pemuatan/kesalahan, serta simulasi pemrosesan dengan Riverpod.
+- **Login:** status login, pemuatan, pesan kesalahan, dan logout menggunakan Cubit (`flutter_bloc`).
+- **Dashboard HR:** ringkasan statistik, kehadiran per divisi, dan aktivitas dengan tata letak responsif.
 
 ## Teknologi
 
 - Flutter dan Dart
+- Provider
+- Riverpod (`flutter_riverpod`)
+- Cubit / `flutter_bloc`
+- Equatable
 - Material 3
-- `go_router` untuk navigasi dan perlindungan rute
 
-## Menjalankan aplikasi web
+## Menjalankan aplikasi di web
 
-Pastikan Flutter SDK dan Google Chrome sudah tersedia, lalu jalankan dari root
-proyek:
+Pastikan Flutter SDK dan Google Chrome telah tersedia. Dari direktori utama
+proyek, jalankan:
 
 ```bash
 flutter pub get
-flutter run -d chrome --web-port 8080
-```
-
-Setelah aplikasi berjalan, buka [http://localhost:8080](http://localhost:8080).
-
-Untuk menjalankan di Android, hubungkan perangkat atau mulai emulator, lalu:
-
-```bash
-flutter run -d android
-```
-
-## Pengujian dan analisis
-
-```bash
-flutter test
-flutter analyze
+flutter run -d chrome
 ```
 
 ## Struktur proyek
 
 ```text
 lib/
-  models/       Model produk
-  pages/        Halaman aplikasi
-  router/       Konfigurasi rute
-  state/        State login dan keranjang
-  widgets/      Widget yang digunakan bersama
-web/            Berkas platform web
-test/           Pengujian aplikasi
+  latihan61_provider/  Pengajuan dan ringkasan cuti
+  latihan62_riverpod/  Penggajian dan pengelolaan state Riverpod
+  latihan63_bloc/      Login dan sesi dengan Cubit
+  models/              Model dan data contoh karyawan
+  pages/               Dashboard HR
+  theme/               Tema, warna, dan mode tampilan
+  widgets/             Komponen UI bersama
+  home_page.dart       Beranda dan navigasi ke modul
+  main.dart            Titik masuk aplikasi dan penyedia state
 ```
 
 ## Catatan
 
-Data produk bersifat contoh. Login dan keranjang disimpan di memori selama
-aplikasi berjalan. Checkout hanya simulasi dan belum terhubung ke backend
-atau layanan pembayaran.
+Aplikasi ini masih berupa demo: data karyawan dan statistik menggunakan data
+contoh, data cuti hanya disimpan selama aplikasi berjalan, dan penggajian
+menggunakan API simulasi lokal—belum terhubung ke backend atau layanan HR
+eksternal.
+
+Untuk mencoba login demo, gunakan:
+
+- Email: `admin@company.com`
+- Password: `admin123`
