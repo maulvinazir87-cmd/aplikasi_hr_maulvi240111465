@@ -1,48 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' show ProviderScope;
+import 'package:provider/provider.dart';
 
-import 'router/app_router.dart';
-import 'state/auth_state.dart';
-import 'state/cart_state.dart';
+import 'home_page.dart';
+import 'latihan61_provider/cuti_notifier.dart';
+import 'latihan63_bloc/app_bloc_observer.dart';
+import 'latihan63_bloc/auth_cubit.dart';
+import 'theme/app_theme.dart';
 
 void main() {
-  final authState = AuthState();
-  final cartState = CartState();
-  final router = createAppRouter(
-    authState: authState,
-    cartState: cartState,
-  );
+  Bloc.observer = AppBlocObserver(); // log semua perubahan state
   runApp(
-    TokoApp(
-      authState: authState,
-      cartState: cartState,
-      router: router,
+    ProviderScope(
+      // Riverpod (Latihan 6.2)
+      child: ChangeNotifierProvider(
+        // Provider (Latihan 6.1)
+        create: (_) => CutiNotifier(),
+        child: BlocProvider(
+          // Cubit (Latihan 6.3)
+          create: (_) => AuthCubit(),
+          child: const AplikasiHR(),
+        ),
+      ),
     ),
   );
 }
 
-class TokoApp extends StatelessWidget {
-  final AuthState authState;
-  final CartState cartState;
-  final GoRouter router;
-
-  const TokoApp({
-    super.key,
-    required this.authState,
-    required this.cartState,
-    required this.router,
-  });
+class AplikasiHR extends StatelessWidget {
+  const AplikasiHR({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Toko App',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
-        useMaterial3: true,
-      ),
-      routerConfig: router,
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: themeModeNotifier,
+      builder: (context, mode, child) {
+        return MaterialApp(
+          title: 'Aplikasi HR',
+          debugShowCheckedModeBanner: false,
+          theme: buildLightTheme(),
+          darkTheme: buildDarkTheme(),
+          themeMode: mode,
+          home: const HomePage(),
+        );
+      },
     );
   }
 }
