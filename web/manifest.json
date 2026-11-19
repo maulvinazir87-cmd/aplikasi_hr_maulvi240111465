@@ -1,6 +1,6 @@
 {
-    "name": "toko_app",
-    "short_name": "toko_app",
+    "name": "aplikasi_hr",
+    "short_name": "aplikasi_hr",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
